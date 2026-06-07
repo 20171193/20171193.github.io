@@ -238,6 +238,12 @@
     display: block;
   }
 
+  /* PNG 코드 이미지 크기 제한 */
+  img.doc-img {
+    width: 70%;
+    margin: 0 auto;
+  }
+
   /* 이미지 2개 나란히 */
   .img-row {
     display: grid;
@@ -386,19 +392,10 @@
     <p><code>InteractObject</code> 클래스에는 Hover(RayInteract에 트리거)된 경우 아웃라인 셰이더를 그리는 <code>UpdateOutLine</code> 메서드를 정의하였고, 오브젝트와 플레이어 간의 상호작용할 수 있는 최소 거리, 상호작용이 된 경우 플레이어로부터 오브젝트가 위치하는 거리를 정의하였습니다.</p>
 
     <div class="img-row">
-      <video class="doc-video" autoplay loop muted playsinline>
-        <source src="assets/monet/monet_2_outline.gif" type="video/mp4">
-        <img src="assets/monet/monet_2_outline.gif" alt="아웃라인 셰이더">
-      </video>
-      <video class="doc-video" autoplay loop muted playsinline>
-        <source src="assets/monet/monet_3_position.gif" type="video/mp4">
-        <img src="assets/monet/monet_3_position.gif" alt="상호작용 최초 위치 설정">
-      </video>
+      <img class="doc-img" src="assets/monet/monet_2_outline.gif" alt="아웃라인 셰이더">
+      <img class="doc-img" src="assets/monet/monet_3_position.gif" alt="상호작용 최초 위치 설정">
     </div>
-    <video class="doc-video" autoplay loop muted playsinline>
-      <source src="assets/monet/monet_4_position2.gif" type="video/mp4">
-      <img src="assets/monet/monet_4_position2.gif" alt="상호작용 위치 설정 2">
-    </video>
+    <img class="doc-img" src="assets/monet/monet_4_position2.gif" alt="상호작용 위치 설정 2">
 
     <p>추가로, <code>OnSelectEntering()</code>, <code>OnSelectExiting()</code> 등 Virtual로 선언된 메서드의 다형성을 활용하여 다양한 기능을 수행하는 오브젝트를 제작하였습니다.</p>
   </div>
@@ -412,21 +409,12 @@
     </div>
 
     <h3>핵심 기획 (Superliminal 스타일 기믹)</h3>
-    <video class="doc-video" autoplay loop muted playsinline>
-      <source src="assets/monet/monet_5_superliminal.gif" type="video/mp4">
-      <img src="assets/monet/monet_5_superliminal.gif" alt="Superliminal 예시">
-    </video>
+    <img class="doc-img" src="assets/monet/monet_5_superliminal.gif" alt="Superliminal 예시">
     <p>해당 기믹은 잡은 오브젝트에 원근이라는 개념을 부여하지 않고, 화면에 그려지는 크기 그대로 놓였을 때도 유지하는 것입니다. 실제 구현한 오브젝트는 <strong>스테이지 1 체스 퍼즐</strong>입니다.</p>
 
     <div class="img-row">
-      <video class="doc-video" autoplay loop muted playsinline>
-        <source src="assets/monet/monet_6_illusion1.gif" type="video/mp4">
-        <img src="assets/monet/monet_6_illusion1.gif" alt="착시 기믹 예시 1">
-      </video>
-      <video class="doc-video" autoplay loop muted playsinline>
-        <source src="assets/monet/monet_7_illusion2.gif" type="video/mp4">
-        <img src="assets/monet/monet_7_illusion2.gif" alt="착시 기믹 예시 2">
-      </video>
+      <img class="doc-img" src="assets/monet/monet_6_illusion1.gif" alt="착시 기믹 예시 1">
+      <img class="doc-img" src="assets/monet/monet_7_illusion2.gif" alt="착시 기믹 예시 2">
     </div>
 
     <h3>구현 메커니즘 (Resize 함수)</h3>
@@ -449,10 +437,7 @@
       <div class="section-line"></div>
     </div>
 
-    <video class="doc-video" autoplay loop muted playsinline>
-      <source src="assets/monet/monet_11_inventory.gif" type="video/mp4">
-      <img src="assets/monet/monet_11_inventory.gif" alt="인벤토리 인게임 예시">
-    </video>
+    <img class="doc-img" src="assets/monet/monet_11_inventory.gif" alt="인벤토리 인게임 예시">
 
     <h3>3-1. MVC 패턴의 활용</h3>
     <p>인벤토리의 데이터와 UI를 MVC 패턴을 응용하여 구현하였습니다.</p>
