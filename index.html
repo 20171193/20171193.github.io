@@ -16,7 +16,7 @@
     --highlight: #f97316;
     --text: #0f1c2e;
     --text-muted: #3a4f6a;
-    --text-dim: #8ca0b8;
+    --text-dim: #4c6178;
     --radius: 12px;
     --nav-height: 60px;
   }
@@ -30,6 +30,7 @@
     color: var(--text);
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
+    font-size: 16px;
     line-height: 1.7;
   }
 
@@ -67,10 +68,11 @@
 
   .nav-links a {
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 11px;
+    font-size: 13px;
+    font-weight: 500;
     color: var(--text-dim);
     text-decoration: none;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     transition: color 0.2s;
   }
@@ -135,9 +137,9 @@
   }
 
   .hero-desc {
-    font-size: 15px;
+    font-size: 18px;
     color: var(--text-muted);
-    line-height: 1.9;
+    line-height: 1.8;
     font-weight: 400;
   }
 
@@ -183,7 +185,7 @@
     flex-direction: column;
     align-items: center;
   }
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.68);
   }
 
   .section.dark .about-val {
@@ -199,9 +201,9 @@
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 10px;
+    font-size: 12px;
     color: var(--text-dim);
-    letter-spacing: 0.15em;
+    letter-spacing: 0.08em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -278,7 +280,7 @@
   }
 
   .section.dark .minor-section-label {
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.68);
   }
 
   .section.dark .section-title {
@@ -292,7 +294,7 @@
   }
 
   .section.dark .about-key {
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.68);
   }
 
   .section.dark .about-val {
@@ -344,13 +346,14 @@
   }
 
   .about-key {
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text-dim);
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: 0.02em;
   }
 
   .about-val {
-    font-size: 15px;
+    font-size: 17px;
     color: var(--text);
     font-weight: 500;
     line-height: 1.5;
@@ -412,19 +415,19 @@
   }
 
   .skill-name {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     color: var(--text);
   }
 
   .skill-level {
-    font-size: 11px;
+    font-size: 12px;
     color: var(--highlight);
     font-weight: 700;
   }
 
   .skill-desc {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--text-muted);
     line-height: 1.6;
   }
@@ -487,7 +490,7 @@
   }
 
   .project-name {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
     color: var(--text);
   }
@@ -500,10 +503,10 @@
 
   .tag {
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 10px;
+    font-size: 12px;
     padding: 2px 8px;
     border-radius: 100px;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
   }
 
   .tag-genre {
@@ -525,7 +528,7 @@
   }
 
   .project-role {
-    font-size: 12px;
+    font-size: 14.5px;
     color: var(--text-dim);
   }
 
@@ -539,8 +542,8 @@
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    font-size: 11px;
-    color: #b8860b;
+    font-size: 12px;
+    color: #9a6d05;
     border: 1px solid rgba(184,134,11,0.3);
     background: rgba(184,134,11,0.07);
     padding: 2px 8px;
@@ -574,23 +577,23 @@
   }
 
   .minor-title {
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 14.5px;
+    font-weight: 600;
     color: var(--text);
   }
 
   .minor-meta {
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 10px;
+    font-size: 12.5px;
     color: var(--text-dim);
   }
 
   .minor-section-label {
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 700;
     color: var(--text-dim);
-    letter-spacing: 0.15em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     margin-top: 3rem;
     margin-bottom: 1rem;
@@ -605,9 +608,9 @@
 
   .footer-text {
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 11px;
+    font-size: 12.5px;
     color: var(--text-dim);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
   }
 
   @media (max-width: 600px) {
@@ -677,7 +680,7 @@
         <div class="about-val">010-2504-2259</div>
       </div>
       <div class="about-item">
-        <div class="about-icon">✉️</div>
+        <div class="about-icon">📧</div>
         <div class="about-key">이메일</div>
         <div class="about-val"><a href="mailto:shimnaldo98@gmail.com">shimnaldo98@gmail.com</a></div>
       </div>
@@ -836,7 +839,7 @@
       <div class="project-item" onclick="location.href='overcooked.html'">
         <div class="project-main">
           <div class="project-header">
-            <span class="project-name">오버쿡드2 <span style="font-size:12px; color:var(--text-dim); font-weight:400;">(모작)</span></span>
+            <span class="project-name">오버쿡드2 <span style="font-size:14px; color:var(--text-dim); font-weight:400;">(모작)</span></span>
             <div class="project-tags">
               <span class="tag tag-genre">코옵 · 시뮬레이션</span>
               <span class="tag tag-tool">Unity3D</span>
@@ -870,7 +873,7 @@
       <div class="project-item" onclick="location.href='sannabi.html'">
         <div class="project-main">
           <div class="project-header">
-            <span class="project-name">산나비 <span style="font-size:12px; color:var(--text-dim); font-weight:400;">(모작)</span></span>
+            <span class="project-name">산나비 <span style="font-size:14px; color:var(--text-dim); font-weight:400;">(모작)</span></span>
             <div class="project-tags">
               <span class="tag tag-genre">로프액션 플랫포머</span>
               <span class="tag tag-tool">Unity2D</span>
