@@ -1,919 +1,295 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>심재천 | Client Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #ffffff;
-    --surface: #f0f4ff;
-    --surface2: #e4ecff;
-    --border: #c8d8f0;
-    --accent: #1a4fa8;
-    --accent-light: #3b6fd4;
-    --highlight: #f97316;
-    --text: #0f1c2e;
-    --text-muted: #3a4f6a;
-    --text-dim: #4c6178;
-    --radius: 12px;
-    --nav-height: 60px;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.7;
-  }
-
-  /* 네비게이션 */
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: var(--nav-height);
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2rem;
-  }
-
-  .nav-logo {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text);
-    text-decoration: none;
-    letter-spacing: 0.05em;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-dim);
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--highlight); }
-
-  /* 히어로 섹션 */
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: var(--nav-height) 2rem 0;
-    position: relative;
-    background: #ffffff;
-  }
-
-  .hero-inner {
-    max-width: 960px;
-    width: 100%;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .hero-left {
-    display: flex;
-    justify-content: center;
-  }
-
-  .hero-photo {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid var(--accent);
-    box-shadow: 0 8px 32px rgba(26,79,168,0.15);
-  }
-
-  .hero-right {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  .hero-label {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--highlight);
-    letter-spacing: 0.05em;
-  }
-
-  .hero-name {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    color: var(--accent);
-  }
-
-  .hero-desc {
-    font-size: 18px;
-    color: var(--text-muted);
-    line-height: 1.8;
-    font-weight: 400;
-  }
-
-  .hero-links {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .hero-link {
-    font-size: 13px;
-    font-weight: 700;
-    padding: 12px 28px;
-    border-radius: 100px;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-
-  .hero-link-primary {
-    background: var(--accent);
-    color: #ffffff;
-    border: 2px solid var(--accent);
-  }
-
-  .hero-link-primary:hover {
-    background: transparent;
-    color: var(--accent);
-  }
-
-  .hero-link-secondary {
-    background: var(--accent);
-    color: #ffffff;
-    border: 2px solid var(--accent);
-  }
-
-  .hero-link-secondary:hover {
-    background: transparent;
-    color: var(--accent);
-  }
-
-  #about .section-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-    color: rgba(255,255,255,0.68);
-  }
-
-  .section.dark .about-val {
-    color: #ffffff;
-  }
-
-  .section.dark .about-val a {
-    color: #a0c4ff;
-  }
-
-  .scroll-hint {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 12px;
-    color: var(--text-dim);
-    letter-spacing: 0.08em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    animation: bounce 2s infinite;
-  }
-
-  .scroll-hint::after {
-    content: '↓';
-    font-size: 14px;
-  }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(6px); }
-  }
-
-  /* 공통 섹션 */
-  .section {
-    padding: 6rem 0;
-    background: var(--bg);
-  }
-
-  .section.dark {
-    background: #1e3a6e;
-  }
-
-  .section.dark .project-list {
-    background: rgba(255,255,255,0.15);
-    border-color: rgba(255,255,255,0.2);
-  }
-
-  .section.dark .project-item {
-    background: #ffffff;
-  }
-
-  .section.dark .project-item:hover {
-    background: var(--surface);
-  }
-
-  .section.dark .project-name {
-    color: var(--text);
-  }
-
-  .section.dark .project-role {
-    color: var(--text-muted);
-  }
-
-  .section.dark .project-arrow {
-    color: var(--text-dim);
-  }
-
-  .section.dark .project-item:hover .project-arrow {
-    color: var(--accent);
-  }
-
-  .section.dark .tag-tool {
-    background: var(--surface2);
-    color: var(--text-muted);
-    border-color: var(--border);
-  }
-
-  .section.dark .minor-card {
-    background: #ffffff;
-    border-color: rgba(255,255,255,0.3);
-  }
-
-  .section.dark .minor-title {
-    color: var(--text);
-  }
-
-  .section.dark .minor-meta {
-    color: var(--text-muted);
-  }
-
-  .section.dark .minor-section-label {
-    color: rgba(255,255,255,0.68);
-  }
-
-  .section.dark .section-title {
-    color: #ffffff;
-  }
-
-  #about .section-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .section.dark .about-key {
-    color: rgba(255,255,255,0.68);
-  }
-
-  .section.dark .about-val {
-    color: #ffffff;
-  }
-
-  .section.dark .about-val a {
-    color: #a0c4ff;
-  }
-
-  .section-inner {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
-
-  .section-title {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    font-weight: 900;
-    color: var(--text);
-    letter-spacing: -0.02em;
-    margin-bottom: 3rem;
-    text-align: center;
-  }
-
-  .section-title::after {
-    display: none;
-  }
-
-  /* ABOUT */
-  .about-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem 4rem;
-    width: fit-content;
-    margin: 0 auto;
-  }
-
-  .about-item {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .about-icon {
-    font-size: 24px;
-    margin-bottom: 6px;
-  }
-
-  .about-key {
-    font-size: 13px;
-    color: var(--text-dim);
-    font-weight: 600;
-    letter-spacing: 0.02em;
-  }
-
-  .about-val {
-    font-size: 17px;
-    color: var(--text);
-    font-weight: 500;
-    line-height: 1.5;
-  }
-
-  .about-val a {
-    color: var(--accent);
-    text-decoration: none;
-  }
-
-  .about-val a:hover { text-decoration: underline; }
-
-  /* SKILLS */
-  .skills-category {
-    margin-bottom: 3rem;
-  }
-
-  .skills-category-label {
-    font-size: 1.4rem;
-    font-weight: 900;
-    color: var(--accent);
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--border);
-  }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 1rem;
-  }
-
-  .skill-card {
-    background: #ffffff;
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: var(--radius);
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .skill-icon {
-    width: 36px;
-    height: 36px;
-    object-fit: contain;
-    margin-bottom: 4px;
-  }
-
-  .skill-icon-placeholder {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    color: var(--highlight);
-    margin-bottom: 4px;
-  }
-
-  .skill-name {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-  }
-
-  .skill-level {
-    font-size: 12px;
-    color: var(--highlight);
-    font-weight: 700;
-  }
-
-  .skill-desc {
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-    color: #aaa;
-    line-height: 1.6;
-  }
-
-  .skill-card-wide {
-    grid-column: span 2;
-  }
-
-  .skill-icons-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 4px;
-  }
-  .project-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-
-  .project-item {
-    background: var(--bg);
-    padding: 1.75rem 2rem;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 1rem;
-    align-items: start;
-    text-decoration: none;
-    color: inherit;
-    transition: background 0.2s;
-    cursor: pointer;
-  }
-
-  .project-item:hover {
-    background: var(--surface);
-  }
-
-  .project-item:hover .project-arrow {
-    color: var(--accent);
-    transform: translate(2px, -2px);
-  }
-
-  .project-main {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .project-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .project-name {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text);
-  }
-
-  .project-tags {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-
-  .tag {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 12px;
-    padding: 2px 8px;
-    border-radius: 100px;
-    letter-spacing: 0.02em;
-  }
-
-  .tag-genre {
-    background: rgba(26,79,168,0.08);
-    color: var(--accent);
-    border: 1px solid rgba(26,79,168,0.2);
-  }
-
-  .tag-tool {
-    background: var(--surface2);
-    color: var(--text-muted);
-    border: 1px solid var(--border);
-  }
-
-  .tag-team {
-    background: rgba(249,115,22,0.08);
-    color: var(--highlight);
-    border: 1px solid rgba(249,115,22,0.2);
-  }
-
-  .project-role {
-    font-size: 14.5px;
-    color: var(--text-dim);
-  }
-
-  .project-awards {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-
-  .award-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 12px;
-    color: #9a6d05;
-    border: 1px solid rgba(184,134,11,0.3);
-    background: rgba(184,134,11,0.07);
-    padding: 2px 8px;
-    border-radius: 100px;
-  }
-
-  .project-arrow {
-    font-size: 18px;
-    color: var(--text-dim);
-    transition: color 0.2s, transform 0.2s;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  /* 기타 프로젝트 */
-  .minor-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-
-  .minor-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1rem 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .minor-title {
-    font-size: 14.5px;
-    font-weight: 600;
-    color: var(--text);
-  }
-
-  .minor-meta {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 12.5px;
-    color: var(--text-dim);
-  }
-
-  .minor-section-label {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--text-dim);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-top: 3rem;
-    margin-bottom: 1rem;
-  }
-
-  /* 푸터 */
-  footer {
-    padding: 3rem 0;
-    border-top: 1px solid var(--border);
-    text-align: center;
-  }
-
-  .footer-text {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 12.5px;
-    color: var(--text-dim);
-    letter-spacing: 0.05em;
-  }
-
-  @media (max-width: 600px) {
-    .about-grid { grid-template-columns: 1fr; }
-    .nav-links { display: none; }
-    .project-item { grid-template-columns: 1fr; }
-    .hero-inner { grid-template-columns: 1fr; text-align: center; }
-    .hero-photo { width: 200px; height: 200px; }
-    .hero-links { justify-content: center; }
-  }
-</style>
-</head>
-<body>
-
-<!-- 네비게이션 -->
-<nav>
-  <a class="nav-logo" href="#hero">심재천</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-  </ul>
-</nav>
-
-<!-- 히어로 -->
-<section id="hero">
-  <div class="hero-inner">
-    <div class="hero-left">
-      <img class="hero-photo" src="assets/icon/profile_sjc.jpg" alt="심재천 프로필 사진">
-    </div>
-    <div class="hero-right">
-      <div class="hero-label">개발자 포트폴리오</div>
-      <h1 class="hero-name">심재천</h1>
-      <p class="hero-desc">팀원과는 더 재미있는 게임을 고민하고,<br>스스로는 플레이어의 더 나은 경험을 고민합니다.</p>
-      <div class="hero-links">
-        <a class="hero-link hero-link-primary" href="https://github.com/20171193" target="_blank">GitHub</a>
-        <a class="hero-link hero-link-secondary" href="https://shimnaldo.tistory.com/" target="_blank">Blog</a>
-      </div>
-    </div>
-  </div>
-  <div class="scroll-hint">SCROLL</div>
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="section dark">
-  <div class="section-inner">
-    <div class="section-title">About Me</div>
-    <div class="about-grid">
-      <div class="about-item">
-        <div class="about-icon">👤</div>
-        <div class="about-key">이름</div>
-        <div class="about-val">심재천</div>
-      </div>
-      <div class="about-item">
-        <div class="about-icon">🎂</div>
-        <div class="about-key">생년월일</div>
-        <div class="about-val">1998.04.10</div>
-      </div>
-      <div class="about-item">
-        <div class="about-icon">📍</div>
-        <div class="about-key">지역</div>
-        <div class="about-val">경기도 화성시 병점구</div>
-      </div>
-      <div class="about-item">
-        <div class="about-icon">📞</div>
-        <div class="about-key">연락처</div>
-        <div class="about-val">010-2504-2259</div>
-      </div>
-      <div class="about-item">
-        <div class="about-icon">📧</div>
-        <div class="about-key">이메일</div>
-        <div class="about-val"><a href="mailto:shimnaldo98@gmail.com">shimnaldo98@gmail.com</a></div>
-      </div>
-      <div class="about-item">
-        <div class="about-icon">🎓</div>
-        <div class="about-key">학력</div>
-        <div class="about-val">호서대학교<br>(게임소프트웨어학)</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills" class="section">
-  <div class="section-inner">
-    <div class="section-title">Skills</div>
-
-    <div class="skills-category">
-      <div class="skills-category-label">언어</div>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <img class="skill-icon" src="assets/icon/C.png" alt="C">
-          <div class="skill-name">C</div>
-          <div class="skill-level">중급</div>
-          <div class="skill-desc">기초 문법, 포인터, 메모리 관리</div>
-        </div>
-        <div class="skill-card">
-          <img class="skill-icon" src="assets/icon/CPP.png" alt="C++">
-          <div class="skill-name">C++</div>
-          <div class="skill-level">중급</div>
-          <div class="skill-desc">STL, 알고리즘</div>
-        </div>
-        <div class="skill-card">
-          <img class="skill-icon" src="assets/icon/Csharp.png" alt="C#">
-          <div class="skill-name">C#</div>
-          <div class="skill-level">중상급</div>
-          <div class="skill-desc">디자인 패턴, 자료구조, GC 이해</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="skills-category">
-      <div class="skills-category-label">엔진</div>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <img class="skill-icon" src="assets/icon/Unity.png" alt="Unity">
-          <div class="skill-name">Unity</div>
-          <div class="skill-level">중상급</div>
-          <div class="skill-desc">파이프라인 이해, 메모리 · 렌더링 최적화</div>
-        </div>
-        <div class="skill-card">
-          <img class="skill-icon" src="assets/icon/Unreal.png" alt="Unreal Engine 4">
-          <div class="skill-name">Unreal Engine 4</div>
-          <div class="skill-level">초중급</div>
-          <div class="skill-desc">Blueprint, C++ 기반 게임플레이 개발</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="skills-category">
-      <div class="skills-category-label">툴</div>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <img class="skill-icon" src="assets/icon/Github.png" alt="Git/Github">
-          <div class="skill-name">Git / Github</div>
-          <div class="skill-level">중상급</div>
-          <div class="skill-desc">다수 프로젝트 경험, Pull Request · Merge · Conflict 해결</div>
-        </div>
-        <div class="skill-card">
-          <img class="skill-icon" src="assets/icon/Claude.png" alt="Claude">
-          <div class="skill-name">Claude</div>
-          <div class="skill-level">중급</div>
-          <div class="skill-desc">에이전트 활용, 학습 및 프로젝트, md 파일 관리</div>
-        </div>
-        <div class="skill-card skill-card-wide">
-          <div class="skill-icons-row">
-            <img class="skill-icon" src="assets/icon/Jira.png" alt="Jira">
-            <img class="skill-icon" src="assets/icon/Slack.png" alt="Slack">
-            <img class="skill-icon" src="assets/icon/Trello.png" alt="Trello">
-          </div>
-          <div class="skill-name">Jira · Slack · Trello</div>
-          <div class="skill-desc">협업 프로젝트 일정관리 및 QA</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects" class="section dark">
-  <div class="section-inner">
-    <div class="section-title">Projects</div>
-
-    <div class="project-list">
-
-      <!-- 모네 -->
-      <div class="project-item" onclick="location.href='monet.html'">
-        <div class="project-main">
-          <div class="project-header">
-            <span class="project-name">모네: 잃어버린 아틀리에</span>
-            <div class="project-tags">
-              <span class="tag tag-genre">VR 퍼즐 어드벤처</span>
-              <span class="tag tag-tool">Unity3D</span>
-              <span class="tag tag-tool">C#</span>
-              <span class="tag tag-team">9인</span>
+    <head>
+        <meta charset="utf-8">
+        <title>심재천 | Client Developer</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="심재천, 게임 클라이언트 개발자, Unity, Unreal Engine, 포트폴리오" name="keywords">
+        <meta content="게임 클라이언트 개발자 심재천의 포트폴리오 사이트입니다." name="description">
+
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:300;400;600;700;800&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+        <link href="resume-2-master/css/style.css" rel="stylesheet">
+        <link href="assets/custom.css" rel="stylesheet">
+    </head>
+
+    <body data-spy="scroll" data-target=".navbar" data-offset="51">
+        <div class="wrapper">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <img src="assets/icon/profile_sjc.jpg" alt="심재천 프로필 사진">
+                    <p class="sidebar-bio">팀원과는 더 재미있는 게임을, 스스로는 플레이어에게 더 나은 경험을 고민하는 개발자 심재천입니다.</p>
+                </div>
+                <div class="sidebar-content">
+                    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                        <a href="#" class="navbar-brand">Navigation</a>
+                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarCollapse">
+                            <ul class="nav navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#header">Home<i class="fa fa-home"></i></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#projects">Projects<i class="fa fa-folder-open"></i></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#skills">Skills<i class="fa fa-code"></i></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#contact">Contact<i class="fa fa-envelope"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <div class="sidebar-footer">
+                    <a href="https://github.com/20171193" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://shimnaldo.tistory.com/" target="_blank" title="Blog"><i class="fa fa-blog"></i></a>
+                    <a href="mailto:shimnaldo98@gmail.com" title="Email"><i class="fa fa-envelope"></i></a>
+                </div>
             </div>
-          </div>
-          <div class="project-role">개발 팀장 · 구조 설계 · 컨텐츠/시스템</div>
-        </div>
-        <span class="project-arrow">↗</span>
-      </div>
+            <div class="content">
+                <div class="header" id="header">
+                    <div class="content-inner">
+                        <p>Client Developer Portfolio</p>
+                        <h1>심재천</h1>
+                        <h2></h2>
+                        <div class="typed-text">Unity Engine Developer</div>
+                    </div>
+                </div>
 
-      <!-- 어나더어스 -->
-      <div class="project-item" onclick="location.href='anothearth.html'">
-        <div class="project-main">
-          <div class="project-header">
-            <span class="project-name">어나더어스</span>
-            <div class="project-tags">
-              <span class="tag tag-genre">뱀서라이크 · 방치형</span>
-              <span class="tag tag-tool">Unity2D</span>
-              <span class="tag tag-tool">C#</span>
-              <span class="tag tag-team">7인</span>
+                <div class="large-btn">
+                    <div class="content-inner">
+                        <a class="btn" href="https://www.miricanvas.com/ko/v/15brpwv" target="_blank"><i class="fa fa-file-alt"></i>이력서 보기</a>
+                        <a class="btn" href="https://www.miricanvas.com/ko/v/1502jne" target="_blank"><i class="fa fa-images"></i>포트폴리오 보기</a>
+                        <a class="btn" href="https://github.com/20171193" target="_blank"><i class="fab fa-github"></i>GitHub</a>
+                    </div>
+                </div>
+
+                <div class="portfolio" id="projects">
+                    <div class="content-inner">
+                        <div class="content-header">
+                            <h2>Projects</h2>
+                        </div>
+
+                        <div class="project-list">
+
+                            <a class="project-item" href="monet.html">
+                                <div class="project-header">
+                                    <span class="project-name">모네: 잃어버린 아틀리에</span>
+                                    <div class="project-tags">
+                                        <span class="tag tag-genre">VR 퍼즐 어드벤처</span>
+                                        <span class="tag tag-tool">Unity3D</span>
+                                        <span class="tag tag-tool">C#</span>
+                                        <span class="tag tag-team">9인</span>
+                                    </div>
+                                </div>
+                                <div class="project-role">개발 팀장 · 구조 설계 · 컨텐츠/시스템</div>
+                            </a>
+
+                            <div class="project-item">
+                                <div class="project-header">
+                                    <span class="project-name">어나더어스</span>
+                                    <div class="project-tags">
+                                        <span class="tag tag-genre">뱀서라이크 · 방치형</span>
+                                        <span class="tag tag-tool">Unity2D</span>
+                                        <span class="tag tag-tool">C#</span>
+                                        <span class="tag tag-team">7인</span>
+                                    </div>
+                                </div>
+                                <div class="project-role">방치형 시스템 · BM API 연동 · UI/UX</div>
+                                <div class="project-awards">
+                                    <span class="award-badge">★ 이븐아이 게임톤 4기 준우수상</span>
+                                    <span class="milestone-badge">구글 플레이 스토어 출시 및 업데이트</span>
+                                </div>
+                            </div>
+
+                            <a class="project-item" href="kerberos.html">
+                                <div class="project-header">
+                                    <span class="project-name">케르베로스</span>
+                                    <div class="project-tags">
+                                        <span class="tag tag-genre">액션 퍼즐 어드벤처</span>
+                                        <span class="tag tag-tool">Unreal4</span>
+                                        <span class="tag tag-tool">Blueprint</span>
+                                        <span class="tag tag-team">6인</span>
+                                    </div>
+                                </div>
+                                <div class="project-role">캐릭터 시스템 · 차원 변경 컨텐츠 · UI/UX</div>
+                                <div class="project-awards">
+                                    <span class="award-badge">★ 2022 GGC 대상</span>
+                                    <span class="award-badge">★ 졸업작품 은상</span>
+                                </div>
+                            </a>
+
+                            <div class="project-item">
+                                <div class="project-header">
+                                    <span class="project-name">오버쿡드2 <span style="font-size:14px; color:#888; font-weight:400;">(모작)</span></span>
+                                    <div class="project-tags">
+                                        <span class="tag tag-genre">코옵 · 시뮬레이션</span>
+                                        <span class="tag tag-tool">Unity3D</span>
+                                        <span class="tag tag-tool">Photon Pun2</span>
+                                        <span class="tag tag-team">5인</span>
+                                    </div>
+                                </div>
+                                <div class="project-role">개발 팀장 · 매치메이킹 시스템 · 기술 지원</div>
+                            </div>
+
+                            <div class="project-item">
+                                <div class="project-header">
+                                    <span class="project-name">미친서바이벌</span>
+                                    <div class="project-tags">
+                                        <span class="tag tag-genre">서바이벌 · 뱀서라이크</span>
+                                        <span class="tag tag-tool">Unity3D</span>
+                                        <span class="tag tag-tool">C#</span>
+                                        <span class="tag tag-team">4인</span>
+                                    </div>
+                                </div>
+                                <div class="project-role">구조 설계 · 컨텐츠/시스템 · FSM</div>
+                            </div>
+
+                            <div class="project-item">
+                                <div class="project-header">
+                                    <span class="project-name">산나비 <span style="font-size:14px; color:#888; font-weight:400;">(모작)</span></span>
+                                    <div class="project-tags">
+                                        <span class="tag tag-genre">로프액션 플랫포머</span>
+                                        <span class="tag tag-tool">Unity2D</span>
+                                        <span class="tag tag-tool">C#</span>
+                                        <span class="tag tag-team">개인</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="other-projects-label">Other Projects</div>
+                        <div class="other-projects-grid">
+                            <div class="other-project-card">
+                                <div class="other-project-title">캣런</div>
+                                <div class="other-project-meta">Unity2D · 개인</div>
+                            </div>
+                            <div class="other-project-card">
+                                <div class="other-project-title">학교탈출</div>
+                                <div class="other-project-meta">Unity2D · 팀</div>
+                            </div>
+                            <div class="other-project-card">
+                                <div class="other-project-title">JCEngine</div>
+                                <div class="other-project-meta">C++ · 개인</div>
+                            </div>
+                            <div class="other-project-card">
+                                <div class="other-project-title">마스터키</div>
+                                <div class="other-project-meta">Unreal · 팀</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service" id="skills">
+                    <div class="content-inner">
+                        <div class="content-header">
+                            <h2>Skills</h2>
+                        </div>
+
+                        <div class="skill-category">
+                            <div class="skill-category-label">언어</div>
+                            <div class="skill-icons-row">
+                                <div class="skill-icon-wrap" data-tooltip="중급 : 기초 문법, 포인터, 메모리 관리">
+                                    <img src="assets/icon/C.png" alt="C">
+                                </div>
+                                <div class="skill-icon-wrap" data-tooltip="중급 : STL, 알고리즘">
+                                    <img src="assets/icon/CPP.png" alt="C++">
+                                </div>
+                                <div class="skill-icon-wrap" data-tooltip="중상급 : 디자인 패턴, 자료구조, GC 이해">
+                                    <img src="assets/icon/Csharp.png" alt="C#">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <div class="skill-category-label">엔진</div>
+                            <div class="skill-icons-row">
+                                <div class="skill-icon-wrap" data-tooltip="중상급 : 파이프라인 이해, 메모리·렌더링 최적화">
+                                    <img src="assets/icon/Unity.png" alt="Unity">
+                                </div>
+                                <div class="skill-icon-wrap" data-tooltip="초중급 : Blueprint, C++ 기반 게임플레이 개발">
+                                    <img src="assets/icon/Unreal.png" alt="Unreal Engine 4">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <div class="skill-category-label">툴</div>
+                            <div class="skill-icons-row">
+                                <div class="skill-icon-wrap" data-tooltip="중상급 : 다수 프로젝트 경험, Pull Request · Merge · Conflict 해결">
+                                    <img src="assets/icon/Github.png" alt="Git/Github">
+                                </div>
+                                <div class="skill-icon-wrap" data-tooltip="중급 : 하네스 엔지니어링(지침 프롬프트, 훅), 서브 에이전트 활용">
+                                    <img src="assets/icon/Claude.png" alt="Claude">
+                                </div>
+                                <div class="skill-icon-wrap" data-tooltip="협업 프로젝트 일정관리 및 QA">
+                                    <img src="assets/icon/Jira.png" alt="Jira">
+                                </div>
+                                <div class="skill-icon-wrap" data-tooltip="협업 프로젝트 일정관리 및 QA">
+                                    <img src="assets/icon/Slack.png" alt="Slack">
+                                </div>
+                                <div class="skill-icon-wrap" data-tooltip="협업 프로젝트 일정관리 및 QA">
+                                    <img src="assets/icon/Trello.png" alt="Trello">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact" id="contact">
+                    <div class="content-inner">
+                        <div class="content-header">
+                            <h2>Contact</h2>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <div class="contact-info">
+                                    <p><i class="fa fa-user"></i>심재천</p>
+                                    <p><i class="fa fa-tag"></i>Client Developer</p>
+                                    <p><i class="fa fa-envelope"></i><a href="mailto:shimnaldo98@gmail.com">shimnaldo98@gmail.com</a></p>
+                                    <p><i class="fa fa-map-marker-alt"></i>경기도 화성시</p>
+                                    <p><i class="fa fa-graduation-cap"></i>호서대학교 게임소프트웨어학과</p>
+                                    <div class="social">
+                                        <a class="btn" href="https://github.com/20171193" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                                        <a class="btn" href="https://shimnaldo.tistory.com/" target="_blank" title="Blog"><i class="fa fa-blog"></i></a>
+                                        <a class="btn" href="mailto:shimnaldo98@gmail.com" title="Email"><i class="fa fa-envelope"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <div class="content-inner">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <p>&copy; Copyright <a href="https://htmlcodex.com">HTML Codex</a>. All Rights Reserved</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Powered by <a href="https://htmlcodex.com">HTML Codex</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="project-role">방치형 시스템 · BM API 연동 · UI/UX</div>
-          <div class="project-awards">
-            <span class="award-badge">★ 이븐아이 게임톤 4기 준우수상</span>
-          </div>
         </div>
-        <span class="project-arrow">↗</span>
-      </div>
 
-      <!-- 케르베로스 -->
-      <div class="project-item" onclick="location.href='kerberos.html'">
-        <div class="project-main">
-          <div class="project-header">
-            <span class="project-name">케르베로스</span>
-            <div class="project-tags">
-              <span class="tag tag-genre">액션 퍼즐 어드벤처</span>
-              <span class="tag tag-tool">Unreal4</span>
-              <span class="tag tag-tool">Blueprint</span>
-              <span class="tag tag-team">6인</span>
-            </div>
-          </div>
-          <div class="project-role">캐릭터 시스템 · 차원 변경 컨텐츠 · UI/UX</div>
-          <div class="project-awards">
-            <span class="award-badge">★ 2022 GGC 대상</span>
-            <span class="award-badge">★ 졸업작품 은상</span>
-          </div>
-        </div>
-        <span class="project-arrow">↗</span>
-      </div>
+        <a href="#" class="back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
-      <!-- 오버쿡드2 -->
-      <div class="project-item" onclick="location.href='overcooked.html'">
-        <div class="project-main">
-          <div class="project-header">
-            <span class="project-name">오버쿡드2 <span style="font-size:14px; color:var(--text-dim); font-weight:400;">(모작)</span></span>
-            <div class="project-tags">
-              <span class="tag tag-genre">코옵 · 시뮬레이션</span>
-              <span class="tag tag-tool">Unity3D</span>
-              <span class="tag tag-tool">Photon Pun2</span>
-              <span class="tag tag-team">5인</span>
-            </div>
-          </div>
-          <div class="project-role">개발 팀장 · 매치메이킹 시스템 · 기술 지원</div>
-        </div>
-        <span class="project-arrow">↗</span>
-      </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="resume-2-master/lib/easing/easing.min.js"></script>
+        <script src="resume-2-master/lib/typed/typed.min.js"></script>
 
-      <!-- 미친서바이벌 -->
-      <div class="project-item" onclick="location.href='madsurvival.html'">
-        <div class="project-main">
-          <div class="project-header">
-            <span class="project-name">미친서바이벌</span>
-            <div class="project-tags">
-              <span class="tag tag-genre">서바이벌 · 뱀서라이크</span>
-              <span class="tag tag-tool">Unity3D</span>
-              <span class="tag tag-tool">C#</span>
-              <span class="tag tag-team">4인</span>
-            </div>
-          </div>
-          <div class="project-role">구조 설계 · 컨텐츠/시스템 · FSM</div>
-        </div>
-        <span class="project-arrow">↗</span>
-      </div>
-
-      <!-- 산나비 -->
-      <div class="project-item" onclick="location.href='sannabi.html'">
-        <div class="project-main">
-          <div class="project-header">
-            <span class="project-name">산나비 <span style="font-size:14px; color:var(--text-dim); font-weight:400;">(모작)</span></span>
-            <div class="project-tags">
-              <span class="tag tag-genre">로프액션 플랫포머</span>
-              <span class="tag tag-tool">Unity2D</span>
-              <span class="tag tag-tool">C#</span>
-              <span class="tag tag-team">개인</span>
-            </div>
-          </div>
-        </div>
-        <span class="project-arrow">↗</span>
-      </div>
-
-    </div>
-
-    <!-- 기타 프로젝트 -->
-    <div class="minor-section-label">Other Projects</div>
-    <div class="minor-grid">
-      <div class="minor-card">
-        <div class="minor-title">캣런</div>
-        <div class="minor-meta">Unity2D · 개인</div>
-      </div>
-      <div class="minor-card">
-        <div class="minor-title">학교탈출</div>
-        <div class="minor-meta">Unity2D · 팀</div>
-      </div>
-      <div class="minor-card">
-        <div class="minor-title">JCEngine</div>
-        <div class="minor-meta">C++ · 개인</div>
-      </div>
-      <div class="minor-card">
-        <div class="minor-title">마스터키</div>
-        <div class="minor-meta">Unreal · 팀</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<footer>
-  <p class="footer-text">© 2024 심재천 · Client Developer</p>
-</footer>
-
-</body>
+        <script src="resume-2-master/js/main.js"></script>
+    </body>
 </html>
