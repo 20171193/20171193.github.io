@@ -4,28 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>모네: 잃어버린 아틀리에 | 심재천</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #ffffff;
-    --surface: #f7f7f5;
-    --surface2: #efefec;
-    --border: #e0e0da;
-    --accent: #2d7a3a;
-    --accent2: #1a5fa8;
-    --text: #1a1a1a;
-    --text-muted: #4a4a4a;
-    --text-dim: #999;
-    --radius: 12px;
+    --surface: #e6e9ff;
+    --border: rgba(0,0,0,.12);
+    --accent: #6146d4;
+    --text: #000000;
+    --text-muted: #464749;
+    --radius: 8px;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  html { scroll-behavior: smooth; }
+
   body {
     background: var(--bg);
-    color: var(--text);
+    color: var(--text-muted);
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
+    font-size: 16px;
     line-height: 1.8;
   }
 
@@ -35,107 +35,128 @@
     padding: 0 2rem;
     display: flex;
     flex-direction: column;
-    gap: 0;
+  }
+
+  a {
+    color: var(--accent);
   }
 
   .back-link {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--text-dim);
+    gap: 6px;
+    font-size: 14px;
+    color: var(--text-muted);
     text-decoration: none;
-    letter-spacing: 0.1em;
     padding: 2rem 0 0;
-    transition: color 0.2s;
   }
   .back-link:hover { color: var(--accent); }
   .back-link::before { content: '←'; }
 
   header {
-    padding: 2.5rem 0 3rem;
+    padding: 2rem 0 2.5rem;
     border-bottom: 1px solid var(--border);
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-  }
-
-  .project-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--accent);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .project-label::before {
-    content: '';
-    display: inline-block;
-    width: 24px;
-    height: 1px;
-    background: var(--accent);
+    gap: 1.25rem;
   }
 
   h1 {
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(1.3rem, 3.2vw, 2.1rem);
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-  }
-
-  .overview-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-
-  .overview-item {
-    background: var(--surface);
-    padding: 1rem 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .overview-key {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: var(--text-dim);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .overview-val {
-    font-size: 13px;
+    font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+    font-weight: 700;
     color: var(--text);
+    line-height: 1.3;
+  }
+
+  .overview-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .overview-table tr {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .overview-table tr:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .overview-table th,
+  .overview-table td {
+    text-align: left;
+    padding: 0.75rem 0.5rem;
     font-weight: 400;
   }
 
-  .game-desc {
+  .overview-table th {
+    width: 120px;
     font-size: 14px;
     color: var(--text-muted);
-    line-height: 1.8;
-    padding: 1.25rem;
+  }
+
+  .overview-table td {
+    font-size: 15px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .game-desc {
+    margin-top: 1.5rem;
     background: var(--surface);
-    border: 1px solid var(--border);
     border-radius: var(--radius);
-    border-left: 3px solid var(--accent);
+    padding: 1rem 1.25rem;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  .game-desc-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .toc {
+    margin-top: 1.5rem;
+  }
+
+  .toc-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .toc ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin: 0;
+  }
+
+  .toc li {
+    padding-left: 0;
+  }
+
+  .toc li::before {
+    content: none;
+  }
+
+  .toc a {
+    font-size: 15px;
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .toc a:hover {
+    color: var(--accent);
   }
 
   .section-block {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: 3rem 0 0;
+    padding: 2.5rem 0 0;
     border-top: 1px solid var(--border);
   }
 
@@ -144,154 +165,100 @@
     padding-top: 2.5rem;
   }
 
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 0.5rem;
-  }
-
-  .section-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    flex-shrink: 0;
-  }
-
   h2 {
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 20px;
+    font-weight: 700;
     color: var(--text);
-  }
-
-  .section-line {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
+    margin-bottom: 1rem;
   }
 
   h3 {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 700;
-    color: var(--accent2);
-    font-family: 'Space Mono', monospace;
-    letter-spacing: 0.05em;
-    margin-top: 1rem;
+    color: var(--accent);
+    margin: 2.25rem 0 0.75rem;
   }
 
   p {
-    font-size: 15.4px;
+    font-size: 16px;
     color: var(--text-muted);
     line-height: 1.9;
-    font-weight: 400;
+    margin: 0.75rem 0;
   }
 
   ul {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.5rem;
+    margin: 0.75rem 0;
   }
 
   ul li {
-    font-size: 15.4px;
+    font-size: 16px;
     color: var(--text-muted);
-    line-height: 1.9;
+    line-height: 1.8;
     padding-left: 1.25rem;
     position: relative;
-    font-weight: 400;
   }
 
   ul li::before {
     content: '—';
     position: absolute;
     left: 0;
-    color: var(--text-dim);
-    font-family: 'Space Mono', monospace;
-  }
-
-  .requirement-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.25rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .requirement-box .box-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: var(--text-dim);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-
-  /* 이미지/영상 공통 */
-  .doc-img, .doc-video {
-    width: 100%;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    display: block;
-    margin: 1rem auto;
-  }
-
-  /* PNG 코드 이미지 크기 제한 */
-  img.doc-img {
-    width: 70%;
-    margin: 1rem auto;
-  }
-
-  /* 이미지 2개 나란히 */
-  .img-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
+    color: var(--accent);
   }
 
   strong {
     color: var(--text);
-    font-weight: 500;
+    font-weight: 700;
+  }
+
+  .doc-img {
+    width: 100%;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    display: block;
+    margin: 1.5rem 0;
+  }
+
+  .img-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+
+  .img-row .doc-img {
+    margin: 0;
+  }
+
+  .doc-img-half {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   code {
     font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    background: var(--surface2);
+    font-size: 13px;
+    background: var(--surface);
     border: 1px solid var(--border);
     padding: 1px 6px;
     border-radius: 4px;
-    color: var(--accent2);
+    color: var(--accent);
   }
 
   footer {
-    padding: 3rem 0 4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    padding: 2.5rem 0 3rem;
     border-top: 1px solid var(--border);
   }
 
   .footer-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 700;
-    color: var(--accent);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .footer-label::before {
-    content: '';
-    display: inline-block;
-    width: 24px;
-    height: 1px;
-    background: var(--accent);
+    color: var(--text);
+    margin-bottom: 0.75rem;
   }
 
   .contact-list {
@@ -301,28 +268,29 @@
   }
 
   .contact-list a {
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
+    font-size: 15px;
     color: var(--text-muted);
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: color 0.2s;
-    letter-spacing: 0.05em;
   }
 
-  .contact-list a:hover { color: var(--accent2); }
+  .contact-list a:hover { color: var(--accent); }
 
   .contact-list .contact-key {
-    color: var(--text-dim);
+    color: var(--text);
+    font-weight: 500;
     min-width: 60px;
   }
 
   @media (max-width: 600px) {
-    .overview-grid { grid-template-columns: 1fr 1fr; }
-    h1 { font-size: 1.5rem; }
-    .img-row { grid-template-columns: 1fr; }
+    .overview-table th {
+      width: 90px;
+    }
+    .img-row {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 </head>
@@ -332,133 +300,103 @@
   <a class="back-link" href="index.html">포트폴리오로 돌아가기</a>
 
   <header>
-    <div class="project-label">Tech Document</div>
     <h1>모네 : 잃어버린 아틀리에</h1>
-    <div class="overview-grid">
-      <div class="overview-item">
-        <div class="overview-key">장르</div>
-        <div class="overview-val">VR 퍼즐 어드벤처</div>
-      </div>
-      <div class="overview-item">
-        <div class="overview-key">플랫폼</div>
-        <div class="overview-val">VR (Oculus Quest 2)</div>
-      </div>
-      <div class="overview-item">
-        <div class="overview-key">개발 환경</div>
-        <div class="overview-val">Unity3D, XR Interaction Toolkit</div>
-      </div>
-      <div class="overview-item">
-        <div class="overview-key">개발 기간</div>
-        <div class="overview-val">24.06.03 ~ 24.08.11 (약 2개월)</div>
-      </div>
-      <div class="overview-item">
-        <div class="overview-key">개발 인원</div>
-        <div class="overview-val">9명 (개발 3, 기획 5, QA 1)</div>
-      </div>
-      <div class="overview-item">
-        <div class="overview-key">담당 업무</div>
-        <div class="overview-val">개발 팀장 · 구조 설계 · 컨텐츠/시스템</div>
-      </div>
-    </div>
+    <table class="overview-table">
+      <tr>
+        <th>장르</th>
+        <td>VR 퍼즐 어드벤처</td>
+      </tr>
+      <tr>
+        <th>플랫폼</th>
+        <td>VR (Oculus Quest 2)</td>
+      </tr>
+      <tr>
+        <th>개발 환경</th>
+        <td>Unity3D, XR Interaction Toolkit</td>
+      </tr>
+      <tr>
+        <th>개발 기간</th>
+        <td>24.06.03 ~ 24.08.11 (약 2개월)</td>
+      </tr>
+      <tr>
+        <th>개발 인원</th>
+        <td>9명 (개발 3, 기획 5, QA 1)</td>
+      </tr>
+      <tr>
+        <th>담당 업무</th>
+        <td>개발 팀장 · 구조 설계 · 컨텐츠/시스템</td>
+      </tr>
+      <tr>
+        <th>목적</th>
+        <td>아트앤메타(<a href="http://artnmeta.com/" target="_blank">artnmeta.com</a>) 기업협약 VR 프로젝트</td>
+      </tr>
+    </table>
     <div class="game-desc">
+      <div class="game-desc-label">한 줄 게임 소개</div>
       화가 모네의 손녀 마리(가상의 인물)가 되어 그림 속 세상으로 들어가 모네의 일생을 체험하는 VR 게임.
     </div>
+    <nav class="toc">
+      <div class="toc-label">목차</div>
+      <ul>
+        <li><a href="#sec-1">1. 크기 착시 기믹 구현</a></li>
+        <li><a href="#sec-2">2. 인벤토리 시스템</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <!-- 핵심 기술 1 -->
-  <div class="section-block">
-    <div class="section-header">
-      <span class="section-num">01</span>
-      <h2>다형성을 활용한 오브젝트 구조</h2>
-      <div class="section-line"></div>
-    </div>
+  <div class="section-block" id="sec-1">
+    <h2>1. 크기 착시 기믹 구현</h2>
 
-    <h3>기획 요구사항</h3>
-    <div class="requirement-box">
-      <div class="box-label">Requirements</div>
-      <ul>
-        <li>레이에 닿은 모든 상호작용 가능한 오브젝트에 아웃라인 셰이더를 입힌다.</li>
-        <li>오브젝트 크기, 퍼즐의 특성을 고려해 오브젝트마다 상호작용이 가능한 거리를 조절해야 한다.</li>
-        <li>특정 오브젝트는 인벤토리에 넣거나 뺄 수 있다.</li>
-        <li>특정 오브젝트는 잡았을 경우 혹은 놓았을 경우 특정 기능을 수행한다. (크기 착시 효과, 포지션 리셋, 소켓에 장착 등)</li>
-      </ul>
-    </div>
+    <h3>요구사항</h3>
+    <p>Superliminal 스타일의 크기 착시 기믹 구현. (Superliminal 예시: 손에 든 물체를 놓는 순간, 화면에 보이는 크기 그대로 실제 크기가 결정되는 착시 퍼즐)</p>
+    <img class="doc-img doc-img-half" src="assets/monet/monet_5_superliminal.gif" alt="Superliminal 예시">
 
-    <h3>설계 및 구현</h3>
-    <p><strong>상속을 통한 코드의 재사용성</strong> — 모든 오브젝트들이 수행해야 할 기능을 상위 오브젝트에 정의하고 이를 상속하여 다양한 오브젝트를 제작하도록 하였습니다.</p>
-    <p><strong>Virtual 키워드를 통한 재정의</strong> — 같은 행동(<code>SelectEnter</code> : 잡혔을 때 호출, <code>SelectExit</code> : 놓였을 때 호출)에서 다양한 기능을 수행할 수 있도록 가상 함수로 구현했습니다.</p>
+    <h3>문제 인식과 인터랙션 재설계</h3>
+    <p>간단한 프로토타입을 제작해 테스트한 결과, 기대한 몰입감이 나오지 않았습니다. 원인은 조준(에임) 방식의 차이였습니다.</p>
+    <p>FPS는 에임이 시점 중앙에 고정돼 있어 잡은 물체가 항상 화면 정면에 렌더링되지만, VR은 에임이 곧 컨트롤러라 시점과 분리돼 있어 잡은 물체가 화면 중앙에 오지 않았습니다.</p>
+    <p>이 착시 기믹은 물체가 항상 정면에 있어야 성립하기 때문에, 이 구조적 차이를 "구현 불가"로 보고하는 대신 물체를 렌즈 앞에 고정 배치하고 컨트롤러에서 물체까지 레이를 연결해 "컨트롤러가 잡은 물체가 중앙에 렌더링되고 있음"을 표현하는 대안을 기획에 제안했고, 채택되어 개발을 진행했습니다.</p>
 
-    <img class="doc-img" src="assets/monet/monet_1_uml.png" alt="InteractObject UML 클래스 다이어그램">
-
-    <p><code>InteractObject</code> 클래스에는 Hover(RayInteract에 트리거)된 경우 아웃라인 셰이더를 그리는 <code>UpdateOutLine</code> 메서드를 정의하였고, 오브젝트와 플레이어 간의 상호작용할 수 있는 최소 거리, 상호작용이 된 경우 플레이어로부터 오브젝트가 위치하는 거리를 정의하였습니다.</p>
-
-    <div class="img-row">
-      <img class="doc-img" src="assets/monet/monet_2_outline.gif" alt="아웃라인 셰이더">
-      <img class="doc-img" src="assets/monet/monet_3_position.gif" alt="상호작용 최초 위치 설정">
-    </div>
-    <img class="doc-img" src="assets/monet/monet_4_position2.gif" alt="상호작용 위치 설정 2">
-
-    <p>추가로, <code>OnSelectEntering()</code>, <code>OnSelectExiting()</code> 등 Virtual로 선언된 메서드의 다형성을 활용하여 다양한 기능을 수행하는 오브젝트를 제작하였습니다.</p>
-  </div>
-
-  <!-- 핵심 기술 2 -->
-  <div class="section-block">
-    <div class="section-header">
-      <span class="section-num">02</span>
-      <h2>ResizingObject를 상속한 크기 착시 오브젝트</h2>
-      <div class="section-line"></div>
-    </div>
-
-    <h3>핵심 기획 (Superliminal 스타일 기믹)</h3>
-    <img class="doc-img" src="assets/monet/monet_5_superliminal.gif" alt="Superliminal 예시">
-    <p>해당 기믹은 잡은 오브젝트에 원근이라는 개념을 부여하지 않고, 화면에 그려지는 크기 그대로 놓였을 때도 유지하는 것입니다. 실제 구현한 오브젝트는 <strong>스테이지 1 체스 퍼즐</strong>입니다.</p>
-
-    <div class="img-row">
-      <img class="doc-img" src="assets/monet/monet_6_illusion1.gif" alt="착시 기믹 예시 1">
-      <img class="doc-img" src="assets/monet/monet_7_illusion2.gif" alt="착시 기믹 예시 2">
-    </div>
-
-    <h3>구현 메커니즘 (Resize 함수)</h3>
-    <img class="doc-img" src="assets/monet/monet_8_resize.png" alt="Resize 함수 소스 코드">
-    <p>오브젝트를 잡기 시작한 순간 오브젝트와 카메라 사이의 거리를 최초 거리로 할당합니다.</p>
+    <h3>상대 거리 기반 크기 조정 알고리즘</h3>
+    <p>레퍼런스 게임을 분석하며 "왜 착시가 느껴지는가", "물체의 크기를 정의하는 기준은 무엇인가"를 고민한 끝에 '상대적 거리'라는 답을 얻었고, 이 알고리즘이 성립하려면 물체가 항상 같은 화면 위치(렌즈 앞)에 있어야 한다는 점도 함께 확인했습니다.</p>
     <div class="img-row">
       <img class="doc-img" src="assets/monet/monet_9_resize2.png" alt="최초 거리 할당 코드">
       <img class="doc-img" src="assets/monet/monet_10_resize3.png" alt="localScale 조정 코드">
     </div>
-    <p>이후 카메라 정면으로 레이(Ray)를 발사해 벽을 체크합니다.</p>
-    <p>오브젝트를 닿은 벽의 앞부분에 위치시키고 다시 한번 거리를 체크, 최초 거리와의 비율을 계산해 오브젝트의 크기를 변경합니다.</p>
-    <p>결과적으로 유저가 최초 거리보다 멀어질수록 오브젝트는 커지고, 최초 거리보다 가까워질수록 오브젝트는 작아집니다. 이를 통해 화면상으로 오브젝트의 크기는 변하지 않는 듯한 착시 효과가 발생합니다.</p>
+    <ul>
+      <li>물체를 잡는 순간 카메라→물체 벡터로 레이를 발사해, 가장 먼저 닿는 벽까지의 거리를 기준 거리로 설정</li>
+      <li>이후 레이 거리를 계속 갱신하며 (현재 거리 / 기준 거리) 비율을 계산</li>
+      <li>이 비율로 오브젝트 크기를 조정해, 화면상 크기가 유지되는 것처럼 보이는 착시를 구현</li>
+      <li>기준 거리를 잴 면이 항상 존재해야 하므로, 이 기믹은 벽으로 둘러싸인 실내 공간에서만 성립한다는 전제를 두고 스테이지를 설계했습니다.</li>
+    </ul>
+
+    <h3>실제 동작 방식</h3>
+    <div class="img-row">
+      <img class="doc-img" src="assets/monet/monet_6_illusion1.gif" alt="착시 기믹 예시 1">
+      <img class="doc-img" src="assets/monet/monet_7_illusion2.gif" alt="착시 기믹 예시 2">
+    </div>
   </div>
 
-  <!-- 핵심 기술 3 -->
-  <div class="section-block">
-    <div class="section-header">
-      <span class="section-num">03</span>
-      <h2>인벤토리 시스템과 ItemObject</h2>
-      <div class="section-line"></div>
-    </div>
+  <div class="section-block" id="sec-2">
+    <h2>2. 인벤토리 시스템</h2>
 
-    <img class="doc-img" src="assets/monet/monet_11_inventory.gif" alt="인벤토리 인게임 예시">
+    <h3>배경 및 요구사항</h3>
+    <p>개발 도중 담당자 변경으로 인벤토리 시스템을 새로 맡게 되었습니다. 이어받은 시스템은 인벤토리 캔버스를 열어 아이템을 드래그&amp;드롭하면 실제 아이템 오브젝트가 캔버스 하위 계층으로 이동하는 방식으로, 아이템 습득 로직이 이 UI 상호작용 안에만 존재하고 별도의 데이터 계층은 없었습니다.</p>
+    <p>담당을 맡은 뒤 기획 의도와 필요한 시스템을 파악해, 미션 보상처럼 UI를 거치지 않고도 아이템을 지급할 수 있어야 한다는 점과 씬 이동·저장/로드를 위해 인벤토리 상태를 데이터로 관리해야 한다는 점을 확인하고 구조를 다시 설계했습니다.</p>
 
-    <h3>3-1. MVC 패턴의 활용</h3>
-    <p>인벤토리의 데이터와 UI를 MVC 패턴을 응용하여 구현하였습니다.</p>
-    <img class="doc-img" src="assets/monet/monet_12_mvc.png" alt="MVC 구조 다이어그램">
-    <ul>
-      <li>아이템 데이터는 고유의 ID 값을 가지며, 이 ID는 아이템 관리자(<code>ItemManager</code>)의 Dictionary에서 Key 값으로, <code>ItemData</code>는 Value 값으로 할당하여 사용합니다.</li>
-      <li>데이터 관리자(<code>DataManager</code>)에 의해 관리되는 인벤토리 슬롯은 실제 오브젝트를 소유하고 있는 것이 아닌 <code>ItemData</code>의 ID를 소유하며, 슬롯이 비어있는 경우 이는 <code>-1</code> 값으로 초기화됩니다.</li>
-      <li>아이템 삽입 시 아이템 객체는 삭제되고 슬롯에 아이템의 ID가 할당됩니다.</li>
-      <li>슬롯은 인벤토리를 켰을 때 활성화(<code>OnEnable</code>)되며, 이때 데이터 매니저를 통해 할당된 아이템의 ID 값을 확인하고 해당 아이템의 아이콘을 UI에 출력합니다.</li>
-    </ul>
-    <img class="doc-img" src="assets/monet/monet_13_onenable.png" alt="OnEnable 메서드 소스 코드">
-    <p><code>ItemID</code> 값이 변경됨에 따라 실행될 이미지 변경 기능을 <code>set</code> 프로퍼티를 사용해 구현하였습니다.</p>
-    <img class="doc-img" src="assets/monet/monet_14_getitemid.png" alt="GetItemID 프로퍼티 소스 코드">
+    <h3>PlayableData와 MVC 구조 설계</h3>
+    <p>게임 진행 중 사용하는 데이터 집합인 PlayableData를 만들어 싱글턴 매니저로 관리했습니다. 게임 종료 시 직렬화해 저장하고 시작 시 역직렬화로 로드하며, DontDestroyOnLoad로 게임이 꺼지기 전까지 유지됩니다.</p>
+    <p>인벤토리 데이터는 슬롯 데이터(슬롯 ID, 아이템 ID, 개수) 구조체 배열로 관리하고, 아이템 삽입 시 아이템의 key를 확인해 슬롯 데이터에 할당합니다. 미션 완료로 자동 습득되는 경우도 Inventory UI(View)를 거치지 않고 PlayableData(Model)에 key 값만 할당하도록 하여, 아이템 지급 로직이 View 상태와 무관하게 동작하도록 했습니다.</p>
 
-    <h3>3-2. 오브젝트 풀링</h3>
-    <p>인벤토리 시스템은 아이템을 넣고 꺼내는 행위가 잦아 객체의 생성과 삭제가 빈번하게 일어납니다. 메모리의 효율적인 관리와 최적화를 위해 오브젝트 풀링(Object Pooling)을 적용했습니다.</p>
-    <img class="doc-img" src="assets/monet/monet_15_regist.png" alt="ItemManager 초기화 메서드 소스 코드">
-    <p>데이터 테이블을 통해 아이템의 데이터를 불러올 때, 아이템 데이터에서 참조하는 실제 아이템 객체들을 풀링하기 위한 풀(Pool)을 생성합니다.</p>
-    <img class="doc-img" src="assets/monet/monet_16_createpool.png" alt="Queue Pool 생성 소스 코드">
-    <p>아이템 풀의 기본 크기를 정해놓고 Queue 자료구조의 <code>Enqueue</code>와 <code>Dequeue</code>를 사용해 오브젝트를 활성화/비활성화하도록 구현하였습니다. 이를 통해 인벤토리 조작으로 인한 가비지 컬렉션(GC) 과부하를 줄이고 데이터를 효율적으로 관리했습니다.</p>
+    <h3>추가 개선</h3>
+    <p><strong>1. 최적화: 오브젝트 풀링</strong></p>
+    <p>실제 오브젝트를 드래그&amp;드롭하는 방식에서 아이템 key 값을 확인해 생성/삭제하는 로직으로 변경되었습니다. 잦은 조작으로 무분별한 객체 생성/삭제에 의한 GC 과부하를 우려해 오브젝트 풀링 방식을 사용했습니다.</p>
+    <img class="doc-img doc-img-half" src="assets/monet/monet_16_createpool.png" alt="Queue Pool 생성 소스 코드">
+    <p><strong>2. 인벤토리 UI 가림 현상 보완</strong></p>
+    <p>VR 특성상 카메라와 인벤토리 UI가 모두 월드 공간에 배치되는데, 손에 든 오브젝트가 카메라(렌즈) 바로 앞에 고정되는 구조(1)다 보니 인벤토리를 열면 든 오브젝트가 UI를 가리는 문제가 있었습니다.</p>
+    <p>인벤토리가 열리면 손에 든 오브젝트 크기를 인벤토리 전용 크기로 줄이고 닫으면 원래 크기로 복구하는 로직을 추가했습니다. 크기가 급격히 바뀌지 않도록 Lerp로 서서히 전환되게 처리했습니다. (기획 요구사항은 아니었지만 방식 제안 후 받아들여져 최종 적용했습니다.)</p>
+
+    <h3>결과</h3>
+    <img class="doc-img doc-img-half" src="assets/monet/monet_11_inventory.gif" alt="인벤토리 인게임 예시">
   </div>
 
   <footer>
