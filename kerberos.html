@@ -4,28 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>케르베로스 | 심재천</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #ffffff;
-    --surface: #f7f7f5;
-    --surface2: #efefec;
-    --border: #e0e0da;
-    --accent: #2d7a3a;
-    --accent2: #1a5fa8;
-    --text: #1a1a1a;
-    --text-muted: #4a4a4a;
-    --text-dim: #999;
-    --radius: 12px;
+    --surface: #e6e9ff;
+    --border: rgba(0,0,0,.12);
+    --accent: #6146d4;
+    --text: #000000;
+    --text-muted: #464749;
+    --radius: 8px;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  html { scroll-behavior: smooth; }
+
   body {
     background: var(--bg);
-    color: var(--text);
+    color: var(--text-muted);
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 400;
+    font-size: 16px;
     line-height: 1.8;
   }
 
@@ -35,89 +35,69 @@
     padding: 0 2rem;
     display: flex;
     flex-direction: column;
-    gap: 0;
+  }
+
+  a {
+    color: var(--accent);
   }
 
   .back-link {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    color: var(--text-dim);
+    gap: 6px;
+    font-size: 14px;
+    color: var(--text-muted);
     text-decoration: none;
-    letter-spacing: 0.1em;
     padding: 2rem 0 0;
-    transition: color 0.2s;
   }
   .back-link:hover { color: var(--accent); }
   .back-link::before { content: '←'; }
 
   header {
-    padding: 2.5rem 0 3rem;
+    padding: 2rem 0 2.5rem;
     border-bottom: 1px solid var(--border);
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-  }
-
-  .project-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--accent);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .project-label::before {
-    content: '';
-    display: inline-block;
-    width: 24px;
-    height: 1px;
-    background: var(--accent);
+    gap: 1.25rem;
   }
 
   h1 {
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(1.3rem, 3.2vw, 2.1rem);
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-  }
-
-  .overview-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-
-  .overview-item {
-    background: var(--surface);
-    padding: 1rem 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .overview-key {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: var(--text-dim);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .overview-val {
-    font-size: 13px;
+    font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+    font-weight: 700;
     color: var(--text);
+    line-height: 1.3;
+  }
+
+  .overview-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .overview-table tr {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .overview-table tr:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .overview-table th,
+  .overview-table td {
+    text-align: left;
+    padding: 0.75rem 0.5rem;
     font-weight: 400;
+  }
+
+  .overview-table th {
+    width: 120px;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .overview-table td {
+    font-size: 15px;
+    color: var(--text);
+    font-weight: 500;
   }
 
   .award-row {
@@ -129,252 +109,213 @@
   .award-badge {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    font-size: 12px;
-    color: #b8860b;
-    border: 1px solid rgba(184,134,11,0.3);
-    background: rgba(184,134,11,0.07);
-    padding: 4px 10px;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 6px 14px;
     border-radius: 100px;
   }
 
+  .award-badge a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
   .game-desc {
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.8;
-    padding: 1.25rem;
     background: var(--surface);
-    border: 1px solid var(--border);
     border-radius: var(--radius);
-    border-left: 3px solid var(--accent);
-  }
-
-  /* 담당업무 */
-  .role-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-
-  .role-item {
-    background: var(--surface);
     padding: 1rem 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.8;
   }
 
-  .role-title {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
+  .game-desc-label {
+    font-size: 13px;
     font-weight: 700;
-    color: var(--accent2);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
   }
 
-  .role-item ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+  .toc {
+    margin-top: 1.5rem;
   }
 
-  .role-item ul li {
-    font-size: 12px;
-    color: var(--text-muted);
-    padding-left: 1rem;
-    position: relative;
-  }
-
-  .role-item ul li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--text-dim);
-    font-family: 'Space Mono', monospace;
-  }
-
-  .section-block {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: 3rem 0 0;
-    border-top: 1px solid var(--border);
-  }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+  .toc-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
     margin-bottom: 0.5rem;
   }
 
-  .section-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    font-weight: 700;
+  .toc ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin: 0;
+  }
+
+  .toc li {
+    padding-left: 0;
+  }
+
+  .toc li::before {
+    content: none;
+  }
+
+  .toc a {
+    font-size: 15px;
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .toc a:hover {
     color: var(--accent);
-    letter-spacing: 0.1em;
-    flex-shrink: 0;
+  }
+
+  .section-block {
+    padding: 2.5rem 0 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-block:first-of-type {
+    border-top: none;
+    padding-top: 2.5rem;
   }
 
   h2 {
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 20px;
+    font-weight: 700;
     color: var(--text);
-  }
-
-  .section-line {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
+    margin-bottom: 1rem;
   }
 
   h3 {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 700;
-    color: var(--accent2);
-    font-family: 'Space Mono', monospace;
-    letter-spacing: 0.05em;
-    margin-top: 1rem;
+    color: var(--accent);
+    margin: 2.25rem 0 0.75rem;
   }
 
   p {
-    font-size: 16.9px;
+    font-size: 16px;
     color: var(--text-muted);
     line-height: 1.9;
-    font-weight: 400;
+    margin: 0.75rem 0;
   }
 
   ul {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.5rem;
+    margin: 0.75rem 0;
   }
 
   ul li {
-    font-size: 16.9px;
+    font-size: 16px;
     color: var(--text-muted);
-    line-height: 1.9;
+    line-height: 1.8;
     padding-left: 1.25rem;
     position: relative;
-    font-weight: 400;
   }
 
   ul li::before {
     content: '—';
     position: absolute;
     left: 0;
-    color: var(--text-dim);
-    font-family: 'Space Mono', monospace;
+    color: var(--accent);
   }
 
-  .requirement-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.25rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .requirement-box .box-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px;
-    color: var(--text-dim);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+  strong {
+    color: var(--text);
+    font-weight: 700;
   }
 
   .doc-img {
-    width: 70%;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    display: block;
-    margin: 1rem auto;
-  }
-
-  .doc-img-full {
     width: 100%;
     border-radius: var(--radius);
     border: 1px solid var(--border);
     display: block;
-    margin: 1rem auto;
-  }
-
-  .doc-img-gif {
-    width: 50%;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    display: block;
-    margin: 1rem auto;
+    margin: 1.5rem 0;
   }
 
   .img-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.75rem;
-    margin: 1rem 0;
+    margin: 1.5rem 0;
   }
 
-  .img-row .doc-img {
-    width: 100%;
+  .img-row-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+
+  #award-photos {
+    grid-template-columns: 1fr 1fr 1.8fr;
+    align-items: center;
+  }
+
+  .img-row .doc-img,
+  .img-row-3 .doc-img {
     margin: 0;
   }
 
-  .img-row .doc-img-full {
-    width: 100%;
-    margin: 0;
+  .doc-img-half {
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  strong {
-    color: var(--text);
-    font-weight: 500;
+  .img-row .doc-img-half,
+  .img-row-3 .doc-img-half {
+    margin: 0 auto;
+  }
+
+  .img-caption {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: -0.75rem;
+  }
+
+  .doc-img-60 {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .img-group-gap {
+    margin-top: 4rem;
   }
 
   code {
     font-family: 'Space Mono', monospace;
-    font-size: 12px;
-    background: var(--surface2);
+    font-size: 13px;
+    background: var(--surface);
     border: 1px solid var(--border);
     padding: 1px 6px;
     border-radius: 4px;
-    color: var(--accent2);
+    color: var(--accent);
   }
 
   footer {
-    padding: 3rem 0 4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    padding: 2.5rem 0 3rem;
     border-top: 1px solid var(--border);
-    margin-top: 3rem;
   }
 
   .footer-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 700;
-    color: var(--accent);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .footer-label::before {
-    content: '';
-    display: inline-block;
-    width: 24px;
-    height: 1px;
-    background: var(--accent);
+    color: var(--text);
+    margin-bottom: 0.75rem;
   }
 
   .contact-list {
@@ -384,29 +325,31 @@
   }
 
   .contact-list a {
-    font-family: 'Space Mono', monospace;
-    font-size: 12px;
+    font-size: 15px;
     color: var(--text-muted);
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: color 0.2s;
-    letter-spacing: 0.05em;
   }
 
-  .contact-list a:hover { color: var(--accent2); }
+  .contact-list a:hover { color: var(--accent); }
 
   .contact-list .contact-key {
-    color: var(--text-dim);
+    color: var(--text);
+    font-weight: 500;
     min-width: 60px;
   }
 
   @media (max-width: 600px) {
-    .overview-grid { grid-template-columns: 1fr 1fr; }
-    h1 { font-size: 1.3rem; }
-    .img-row { grid-template-columns: 1fr; }
-    .role-grid { grid-template-columns: 1fr; }
+    .overview-table th {
+      width: 90px;
+    }
+    .img-row,
+    .img-row-3,
+    #award-photos {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 </head>
@@ -416,176 +359,91 @@
   <a class="back-link" href="index.html">포트폴리오로 돌아가기</a>
 
   <header>
-    <div class="project-label">Tech Document</div>
     <h1>케르베로스</h1>
-    <div class="overview-grid">
-      <div class="overview-item">
-        <div class="overview-key">장르</div>
-        <div class="overview-val">퍼즐 &amp; 액션 어드벤처</div>
-      </div>
-      <div class="overview-item">
-        <div class="overview-key">플랫폼</div>
-        <div class="overview-val">PC</div>
-      </div>
-      <div class="overview-item">
-        <div class="overview-key">사용 도구</div>
-        <div class="overview-val">UE4 (C++ / Blueprint)</div>
-      </div>
-      <div class="overview-item">
-        <div class="overview-key">개발 기간</div>
-        <div class="overview-val">22.02.11 ~ 22.06.10 (약 4개월)</div>
-      </div>
-      <div class="overview-item">
-        <div class="overview-key">개발 인원</div>
-        <div class="overview-val">6명 (개발 3, 기획 2, 디자이너 1)</div>
-      </div>
-    </div>
+    <table class="overview-table">
+      <tr>
+        <th>장르</th>
+        <td>퍼즐 &amp; 액션 어드벤처</td>
+      </tr>
+      <tr>
+        <th>플랫폼</th>
+        <td>PC</td>
+      </tr>
+      <tr>
+        <th>개발 환경</th>
+        <td>UE4 (C++ / Blueprint)</td>
+      </tr>
+      <tr>
+        <th>개발 기간</th>
+        <td>22.02.11 ~ 22.06.10 (약 4개월)</td>
+      </tr>
+      <tr>
+        <th>개발 인원</th>
+        <td>6명 (개발 3, 기획 2, 디자이너 1)</td>
+      </tr>
+      <tr>
+        <th>담당 업무</th>
+        <td>게임 플로우 · 플레이어 조작 · 차원 변경 시스템 · 게임 전반 UI/UX</td>
+      </tr>
+      <tr>
+        <th>링크</th>
+        <td><a href="https://www.youtube.com/watch?v=zr5NuAsbu_o" target="_blank">YouTube</a></td>
+      </tr>
+    </table>
 
     <div class="award-row">
       <span class="award-badge">★ 2022 GGC 기획/스토리부문 대상</span>
       <span class="award-badge">★ 졸업작품전 은상</span>
     </div>
 
-    <div class="role-grid">
-      <div class="role-item">
-        <div class="role-title">게임 플로우</div>
-        <ul>
-          <li>레벨간 전환 시스템</li>
-          <li>시네마틱 연출 시스템</li>
-          <li>플레이어 사망 / 리스폰 시스템</li>
-        </ul>
-      </div>
-      <div class="role-item">
-        <div class="role-title">플레이어 시스템</div>
-        <ul>
-          <li>이동 시스템</li>
-          <li>액션 시스템 (구르기, 넉백, 스킬)</li>
-          <li>스킬 시스템 (차원변경)</li>
-          <li>체력 및 스테미너 시스템</li>
-        </ul>
-      </div>
-      <div class="role-item">
-        <div class="role-title">차원변경 시스템</div>
-        <ul>
-          <li>차원변경 시스템 기획 및 제작</li>
-        </ul>
-      </div>
-      <div class="role-item">
-        <div class="role-title">UI 시스템</div>
-        <ul>
-          <li>게임 전반 UI 기획 및 제작</li>
-          <li>UI 애니메이션 기획 및 제작</li>
-          <li>튜토리얼 / 컷 씬 / 일시정지 / 팝업</li>
-        </ul>
-      </div>
+    <div class="game-desc">
+      <div class="game-desc-label">한 줄 게임 소개</div>
+      차원이 변경되는 미지의 섬에서 생존해 보물을 찾는 퍼즐&amp;액션 게임.
     </div>
+
+    <nav class="toc">
+      <div class="toc-label">목차</div>
+      <ul>
+        <li><a href="#sec-1">1. 차원변경 시스템 기획 및 설계</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <!-- 핵심 기술 1 -->
-  <div class="section-block">
-    <div class="section-header">
-      <span class="section-num">01</span>
-      <h2>차원변경 시스템</h2>
-      <div class="section-line"></div>
-    </div>
+  <div class="section-block" id="sec-1">
+    <h2>1. 차원변경 시스템 기획 및 설계</h2>
 
-    <p>초반부 컷씬 진행 이후 차원변경 스킬을 획득합니다.</p>
-    <img class="doc-img-gif" src="assets/kerberos/kerberos_1_dimension_acquire.gif" alt="사이드 뷰 전환 스킬 획득">
+    <h3>배경</h3>
+    <p>졸업작품 중간 발표까지는 게임이 특색 없는 퍼즐·액션물이라는 비평을 받았습니다.</p>
+    <p>차별화될 기능이 필요하다고 판단하던 중, 전공 수업인 게임 그래픽스 수업에서 배운 카메라의 원근/직교 투영 개념을 떠올려 "3D 공간에서 카메라 투영 방식을 바꾸면 2D처럼 보이게 만들 수 있지 않을까"라는 아이디어에서 시스템을 기획했습니다.</p>
 
-    <p>기본적으로 3D 쿼터뷰 환경에서 게임을 플레이하고, 특정 지역/맵에서 2D 사이드뷰 전환(A키), 2D 백 뷰 전환(S키) 능력이 활성화됩니다.</p>
+    <h3>설계</h3>
+    <p>쿼터뷰 + 원근 투영(X/Y/Z축 자유 이동)에서 차원변경을 실행하면 사이드뷰 + 직교 투영(X/Y 혹은 Z/Y축)으로 전환되며, 기존 지형지물이 하나의 축을 기준으로 정렬되어 보이게 됩니다.</p>
+    <p>다만 전환하려는 축 방향에 다른 지형지물이 있으면 플레이어와 겹쳐버리기 때문에, 레이캐스트와 물리 레이어를 활용해 전환 축 방향의 지형지물을 검출했습니다.</p>
+    <p>지형지물이 검출되면 차원변경을 막고 메시지와 함께 검출된 오브젝트를 빨간색으로 짧게 깜빡이도록(머티리얼 스왑) 피드백을 줬습니다.</p>
+    <img class="doc-img doc-img-60" src="assets/kerberos/kerberos_5_backview_fail.gif" alt="백 뷰 전환 실패 - 같은 축에 맵 오브젝트가 위치하는 경우">
 
-    <img class="doc-img-gif" src="assets/kerberos/kerberos_2_sideview_success.gif" alt="사이드 뷰 전환 성공">
-
-    <p>사이드 뷰로 전환할 경우 카메라는 Y축 상(언리얼 엔진 기준 좌표계)에 위치하여 플레이어를 바라보게 되며, 플레이어의 이동은 X축 이동으로 제한됩니다. 백 뷰로 전환할 경우 카메라는 X축 상에 위치하여 플레이어를 바라보게 되며, 플레이어의 이동은 Y축 이동으로 제한됩니다.</p>
-    <p>기존 3D뷰에 위치하던 장애물들이 2D 오브젝트로 변환되어 플레이어와 상호작용합니다. 3D 카메라의 기본 투영방식인 <strong>원근투영 방식</strong>을 스킬 사용 시 <strong>직교투영 방식</strong>으로 변경하여 2D 연출의 느낌을 더했습니다.</p>
-
+    <h3>동작 영상</h3>
     <div class="img-row">
-      <img class="doc-img-full" src="assets/kerberos/kerberos_3_axis_mismatch.gif" alt="축이 맞지 않은 경우">
-      <img class="doc-img-full" src="assets/kerberos/kerberos_4_axis_match.gif" alt="축에 맞게 변경한 경우">
+      <img class="doc-img" src="assets/kerberos/kerberos_1_dimension_acquire.gif" alt="차원변경 획득">
+      <img class="doc-img" src="assets/kerberos/kerberos_16_dimension_acquire.gif" alt="차원변경 획득">
     </div>
+    <p class="img-caption">차원변경 획득</p>
 
-    <p>월드 내 플레이어 좌표는 변화가 없으며, 카메라의 좌표와 투영방법만을 변경해 착시를 주었습니다.</p>
-    <p>3D 공간을 2D로 변경하므로 플레이어와 맵 오브젝트가 겹치는 경우가 발생할 수 있어 스킬 사용 시 카메라가 위치할 좌표 축으로 레이캐스트를 발사합니다. 레이캐스트는 두 가지 오브젝트를 판별합니다.</p>
-
-    <div class="requirement-box">
-      <div class="box-label">Raycast 판별 대상</div>
-      <ul>
-        <li><strong>상호작용이 가능한 맵 오브젝트</strong> — 플레이어와 충돌하는 장애물로 레이캐스트에 닿은 경우 차원변경이 불가합니다.</li>
-        <li><strong>맵을 구성하는 벽 오브젝트</strong> — 플레이어와 충돌하지만 차원변경은 가능하며, 차원변경 시 비활성화됩니다.</li>
-      </ul>
+    <div class="img-row img-group-gap">
+      <img class="doc-img" src="assets/kerberos/kerberos_2_sideview_success.gif" alt="X/Y, Z/Y 차원 변경">
+      <img class="doc-img" src="assets/kerberos/kerberos_4_axis_match.gif" alt="X/Y, Z/Y 차원 변경">
     </div>
+    <p class="img-caption">X/Y, Z/Y 차원 변경</p>
 
-    <img class="doc-img-gif" src="assets/kerberos/kerberos_5_backview_fail.gif" alt="백 뷰 전환 실패 - 같은 축에 맵 오브젝트가 위치하는 경우">
-  </div>
-
-  <!-- 핵심 기술 2 -->
-  <div class="section-block">
-    <div class="section-header">
-      <span class="section-num">02</span>
-      <h2>플레이어 액션</h2>
-      <div class="section-line"></div>
+    <h3>결과</h3>
+    <p>중간 발표에서는 하위권에 머물렀지만, 차원변경 기믹을 추가한 뒤 최종 발표에서는 참가한 16개 팀 중 2등을 기록하며 은상을 수상했습니다.</p>
+    <p>이후 코엑스에서 열린 2022 GlobalGameChallenge에 참가해 기획·스토리 부문 대상을 수상했습니다.</p>
+    <div class="img-row-3" id="award-photos">
+      <img class="doc-img doc-img-half" src="assets/kerberos/kerberos_19_hoseoaward.png" alt="졸업작품전 수상">
+      <img class="doc-img doc-img-half" src="assets/kerberos/kerberos_17_ggcaward.png" alt="GGC 수상">
+      <img class="doc-img doc-img-half" src="assets/kerberos/kerberos_18_ggcaward_picture.png" alt="GGC 수상 현장 사진">
     </div>
-
-    <h3>스테미너 시스템</h3>
-    <p><code>Get World Timer</code>를 사용한 총 세 개의 타이머를 통해 플레이어의 스테미너를 구현했습니다.</p>
-
-    <h3>1-1. 스테미너 소진 타이머</h3>
-    <p>초기 개발단계에서는 단순히 <strong>달리기 키 입력 시작</strong>과 <strong>달리기 키 입력 해제</strong>로 타이머의 실행 여부를 적용했는데, 지형 지물에 막히거나 피해를 입어 넉백을 당한 경우에도 키를 계속 입력하고 있으면 타이머가 계속 유지되었습니다.</p>
-    <p>때문에 <code>sprintSpeed</code>라는 스테미너가 소진될 속도의 임계치를 정해 <strong>달리기 키를 입력하고 있으며, 플레이어의 속도가 임계치 이상일 경우</strong>에만 타이머가 동작하도록 수정하였습니다.</p>
-    <img class="doc-img" src="assets/kerberos/kerberos_6_stamina_consume.png" alt="스테미너 소진 타이머 코드">
-
-    <h3>1-2. 스테미너 회복 타이머</h3>
-    <p>플레이어의 이동속도가 임계치보다 낮을 때 실행됩니다.</p>
-    <img class="doc-img" src="assets/kerberos/kerberos_7_stamina_recover.png" alt="스테미너 회복 타이머 코드">
-
-    <h3>1-3. 탈진 타이머</h3>
-    <p>스테미너가 모두 소진되었을 때 실행됩니다. <code>waitCount</code>라는 딜레이 시간동안 달리기가 불가능하며 반복입력을 방지하기 위해 회복 타이머를 중지합니다. 딜레이 시간이 종료되면 일정량의 스테미너를 즉시 회복하고 달리기가 가능해집니다.</p>
-    <img class="doc-img" src="assets/kerberos/kerberos_8_stamina_zero.png" alt="탈진 타이머 코드">
-
-    <h3>구르기 액션</h3>
-    <p>캐릭터는 <code>Character Movement</code>로 움직입니다. 기본 상태는 <code>Walking</code> 모드로 설정되어 있습니다.</p>
-    <p>초기 개발 단계에서 구르기 시에 캐릭터의 충돌체가 변경되며 땅에 고꾸라지는 듯한 움직임이 보였는데, 구르기 시 <code>Character Movement</code>의 모드를 <code>Flying</code> 모드로 변경하여 중력을 제거하여 보다 매끄러운 움직임이 가능해졌습니다.</p>
-    <img class="doc-img-gif" src="assets/kerberos/kerberos_9_roll.gif" alt="구르기 액션">
-
-    <h3>사다리 타기 액션</h3>
-    <p>플레이어가 사다리의 트리거에 위치한 경우 F키 입력을 활성화합니다. F키를 입력한 경우 해당 사다리의 위치와 회전 값을 기준으로 플레이어를 사다리에 부착시키고 사다리타기 액션을 실행합니다. 이때 플레이어의 이동은 Z축으로 제한됩니다.</p>
-    <div class="img-row">
-      <img class="doc-img-full" src="assets/kerberos/kerberos_10_ladder.gif" alt="사다리 타기 인게임">
-      <img class="doc-img-full" src="assets/kerberos/kerberos_11_ladder_bp.png" alt="사다리 타기 블루프린트">
-    </div>
-  </div>
-
-  <!-- 핵심 기술 3 -->
-  <div class="section-block">
-    <div class="section-header">
-      <span class="section-num">03</span>
-      <h2>UI 시스템</h2>
-      <div class="section-line"></div>
-    </div>
-
-    <p>HUD를 용도별로 캡슐화하고, 각각의 레이어를 관리하기 위해 게임 내 HUD를 총 4개로 구분하였습니다.</p>
-
-    <h3>1. DefaultHUD</h3>
-    <p>플레이어 상태 바가 포함됩니다. (상시 표출, 메인 UI)</p>
-    <img class="doc-img-full" src="assets/kerberos/kerberos_12_defaulthud.png" alt="DefaultHUD 구성">
-
-    <h3>2. PlayerStateHUD</h3>
-    <p>캐릭터 피격, 스테미너 소진 등 화면 연출이 포함됩니다. (이벤트 UI)</p>
-    <div class="img-row">
-      <img class="doc-img-full" src="assets/kerberos/kerberos_13_stamina_full.png" alt="스테미너 충분한 상태 연출">
-      <img class="doc-img-full" src="assets/kerberos/kerberos_14_stamina_empty.png" alt="스테미너 소진 상태 연출">
-    </div>
-
-    <h3>3. PlayStopHUD</h3>
-    <p>일시정지 팝업이 포함됩니다. (일시정지 UI)</p>
-
-    <h3>4. PopUpHUD</h3>
-    <p>게임 진행 중 팝업이 포함됩니다. (메세지 팝업, 컷 씬 팝업, 팝업 UI)</p>
-    <p>컷 씬 : 컷 별로 구성된 애니메이션을 플레이합니다.</p>
-    <div class="img-row">
-      <img class="doc-img-full" src="assets/kerberos/kerberos_15_mid_cutscene.gif" alt="중반부 컷 씬">
-      <img class="doc-img-full" src="assets/kerberos/kerberos_16_dimension_acquire.gif" alt="차원변경 획득 연출">
-    </div>
+    <p style="text-align: center;"><a href="https://www.nocutnews.co.kr/news/5866608" target="_blank">뉴스 링크</a></p>
   </div>
 
   <footer>
