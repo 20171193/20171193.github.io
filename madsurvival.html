@@ -411,15 +411,16 @@
     <img class="doc-img doc-img-55" src="assets/madsurvival/msv_4_bfs_objectspawnpos.png" alt="BFS 기반 오브젝트 스폰 위치 탐색 코드">
 
     <h3>문제 상황</h3>
-    <p>맵을 행렬로 관리하는 설계에 집중하다 보니, 맵을 구성하는 타일 하나하나를 개별 게임 오브젝트로 배치하게 됐습니다. 그 결과 오브젝트 수가 지나치게 많아져 Batches가 크게 늘고, FPS가 11.6까지 떨어졌습니다.</p>
+    <p>맵을 행렬로 관리하는 설계에 집중하다 보니, 정점 1,104개를 가진 개별 오브젝트(맵타일) 3,600개를 씬에 그대로 배치하게 되었습니다. 그 결과 런타임에서 Batches가 크게 증가하고 FPS가 11.6까지 떨어졌습니다.</p>
     <img class="doc-img doc-img-65" src="assets/madsurvival/msv_8_optimize_before.png" alt="최적화 이전 Stats 창">
 
     <h3>1차 시도: 정적 배칭</h3>
-    <p>모든 타일을 Static Object로 표시하고, MeshCollider를 BoxCollider로 교체했으며, 그림자가 필요 없는 바닥 오브젝트의 Shadow Cast Mode를 껐습니다. 그 결과 FPS는 40까지 오르고 Batches도 576까지 줄었지만, 이 결과만으로는 모바일 목표 성능(60fps)을 달성할 수 없다고 판단해 접근 방식을 다시 검토했습니다.</p>
+    <p>모든 타일을 정적 오브젝트로 변환하여 유니티 자체 정적 배칭으로 런타임 연산량을 줄이고자 시도했습니다. 그 결과 Batches가 576으로 줄고, FPS는 40까지 회복되었지만, 이 결과만으로는 모바일 목표 성능(60FPS)까지 회복하기는 어렵다고 판단해 접근 방식을 다시 검토했습니다.</p>
     <img class="doc-img doc-img-half" src="assets/madsurvival/msv_9_optimize_staticbatch.png" alt="정적 배칭 적용 후 Stats 창">
 
     <h3>2차 시도: 메시 결합</h3>
-    <p>타일 하나하나는 종류 정보(데이터)와 충돌체만 있으면 되고, 개별적으로 렌더링될 필요는 없다고 관점을 바꿨습니다. 이를 위해 메시 결합(Mesh Combining)을 적용했습니다. 타일 하나는 1104개의 정점을 갖는데, CombineMeshes는 한 번에 2^16(65,536)개까지의 정점만 결합할 수 있어 59개씩(1104×59=65,136) 묶어 결합했습니다. 그 결과 Batches는 160, SetPass Call은 91까지 줄어 60fps를 달성했습니다.</p>
+    <p>타일 별 데이터는 2차원 행렬로 따로 관리하고, 별도의 충돌체만 존재하면 된다고 판단하였고, 개별적으로 렌더링될 필요는 없다고 관점을 바꿨습니다(한 번에 묶여 렌더링되어도 문제없는 오브젝트 그룹).</p>
+    <p>메시 결합(Mesh Combining)이라는 기술을 찾아, 해당 기술을 적용하여 결합 최대 한도인 2^16(65,536)개에 맞춰 타일 오브젝트 59개의 메시를 물리적으로 결합했습니다. 그 결과 Batches는 160까지 극적으로 줄일 수 있었고, 목표 성능인 60FPS를 달성할 수 있었습니다.</p>
     <img class="doc-img doc-img-70" src="assets/madsurvival/msv_3_optimize_meshcombine.png" alt="메시 결합 적용 코드">
 
     <h3>회고</h3>
