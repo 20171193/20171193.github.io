@@ -255,12 +255,6 @@
     margin-right: auto;
   }
 
-  .doc-img-90 {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   .doc-img-65 {
     width: 65%;
     margin-left: auto;
@@ -356,6 +350,10 @@
     <h1>미친서바이벌</h1>
     <table class="overview-table">
       <tr>
+        <th>목적</th>
+        <td>경일게임아카데미 개발/기획 합반 팀프로젝트</td>
+      </tr>
+      <tr>
         <th>장르</th>
         <td>서바이벌·뱀서라이크</td>
       </tr>
@@ -378,10 +376,6 @@
       <tr>
         <th>담당 업무</th>
         <td>맵 시스템 설계 및 최적화 · 데이터 테이블 연동 · 몬스터/동물 AI(FSM) · 캐릭터 상호작용(채광, 벌목, 전투, 빌딩)</td>
-      </tr>
-      <tr>
-        <th>목적</th>
-        <td>경일게임아카데미 개발/기획 합반 팀프로젝트</td>
       </tr>
     </table>
 
@@ -480,12 +474,11 @@
     <img class="doc-img doc-img-70" src="assets/madsurvival/msv_15_DB_exp.png" alt="Monster Data Table 예시">
     <p class="img-caption">Monster Data Table 예시</p>
 
-    <img class="doc-img doc-img-90" src="assets/madsurvival/msv_13_suggestDB_1.png" alt="데이터 테이블 사용법 안내 1">
-    <img class="doc-img doc-img-60" src="assets/madsurvival/msv_14_suggestDB_2.png" alt="데이터 테이블 사용법 안내 2">
-    <p class="img-caption">간단한 사용법을 Slack Tool을 통해 전달</p>
-
     <h3>설계 및 구현</h3>
     <p>날짜별로 필요한 수치를 엑셀 파일로 정리해 기획자에게 전달하고, 이후에도 같은 형식으로 값을 채워달라는 양식 문서를 함께 전달했습니다. 기획자가 작성한 엑셀 파일은 CSV로 내보내 유니티에서 텍스트로 파싱했습니다. 게임 최초 실행 시 CSV를 읽어 DataManager에 날짜를 key로, 스폰 데이터를 value로 하는 Dictionary에 저장해두고, 해당 날짜가 되면 이 데이터를 꺼내 4-1의 스폰 시스템에 반영했습니다.</p>
+    <img class="doc-img" src="assets/madsurvival/msv_13_suggestDB_1.png" alt="데이터 테이블 사용법 안내 1">
+    <img class="doc-img doc-img-60" src="assets/madsurvival/msv_14_suggestDB_2.png" alt="데이터 테이블 사용법 안내 2">
+    <p class="img-caption">간단한 사용법을 Slack Tool을 통해 전달</p>
 
     <h3>결과 및 회고</h3>
     <p>조잡한 형식의 엑셀·데이터 테이블이지만, 짧은 개발 기간 동안 밸런스 테스트에 드는 시간을 크게 줄일 수 있었습니다. 다만 날짜 데이터는 Dictionary가 아니라 배열로도 충분히 처리할 수 있었을 것 같습니다.</p>
